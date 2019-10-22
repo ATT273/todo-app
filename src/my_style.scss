@@ -1,0 +1,26 @@
+// @import '~bootstrap/scss/bootstrap.scss';
+$test-color: #1ecbe1;
+
+.button-test{
+    background-color: $test-color;
+}
+.app-header{
+    padding: 10px;
+    margin-bottom: 5px;
+    min-height: 50px;
+    background-color: #31c4ce;
+}
+.app-footer{
+    height: 100%;
+    background-color: #31c4ce;
+}
+.todo-list{
+    text-align: left;
+}
+.add-form{
+    margin-bottom: 5px;
+}
+.todo-item{
+    margin-bottom: 3px;
+    min-height: 40px;
+}

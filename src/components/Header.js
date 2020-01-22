@@ -4,7 +4,7 @@ class Header extends Component {
     render() {
         return (
             <div className="app-header">
-                <h1>My ToDo List App</h1>
+                <h1>My ToDo List</h1>
                 <div className="under-line"></div>
                 <p>
                     <h3>{this.props.date.wDay}</h3>

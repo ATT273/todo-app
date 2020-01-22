@@ -1,4 +1,5 @@
 import React, {Component}from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class AddForm extends Component {
 
@@ -26,10 +27,12 @@ class AddForm extends Component {
                         value={this.state.item_name}
                         onChange={this.handleChange}
                         className="form-control" 
-                        placeholder="Input something ..." 
+                        placeholder="Add new task ..." 
                     />
                     <div className="input-group-append">
-                        <button type="submit" className="btn btn-success">+</button>
+                        <button type="submit" className="btn btn-success">
+                            <FontAwesomeIcon icon={['fas', 'plus']} />
+                        </button>
                     </div>
                 </div>
             </form>

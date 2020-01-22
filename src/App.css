@@ -1,11 +1,5 @@
 
-.App {
-  margin: auto;
-  padding: 0px 10px 5px 10px;
-  text-align: center;
-  width: 50%;
-  background: #b6eef5;
-}
+
 .App-logo {
   height: 40vmin;
 }
@@ -25,3 +19,4 @@
 .App-link {
   color: #09d3ac;
 }
+

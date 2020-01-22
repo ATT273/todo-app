@@ -1,26 +1,106 @@
 // @import '~bootstrap/scss/bootstrap.scss';
-$test-color: #1ecbe1;
 
+// Variables
+$test-color: #1ecbe1;
+$main-color-darker: #2bacb4;
+$main-color-dark: #31c4ce;
+$main-color-light: #b6eef5;
+$date-color: #871a0f;
+$app-bg: #f0f0f0;
+$delete-color: #e61924;
+
+// Style
+body {
+    background-color: $main-color-light;
+}
+
+.App {
+    margin: 20px auto;
+    padding: 10px 10px 5px 10px;
+    text-align: center;
+    width: 40%;
+    background-color: $app-bg;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba($color: #000000, $alpha: .3);
+}
 .button-test{
     background-color: $test-color;
 }
 .app-header{
     padding: 10px;
-    margin-bottom: 5px;
+    margin: 5px -10px;
     min-height: 50px;
-    background-color: #31c4ce;
+    
+    h1{
+        font-weight: bold;
+    }
+    p{
+        margin-bottom: 0px;
+        color: $main-color-dark;
+        opacity: 0.8;
+    }
+    .day-n-month{
+        margin-top: -15px;
+        opacity: 0.6;
+    }
+    .under-line{
+        width: 30%;
+        height: 1px;
+        margin: auto;
+        opacity: 0.6;
+        background-color: black;
+    }
 }
-.app-footer{
-    height: 100%;
-    background-color: #31c4ce;
+.app-footer {
+    position: absolute;
+    width: 40%;
+    height: 3rem;
+    bottom: 0px;
+    margin-left: -10px ;
 }
-.todo-list{
+.todo-list {
     text-align: left;
+    min-height: 100%;
 }
-.add-form{
-    margin-bottom: 5px;
+
+.add-form {
+    margin: 15px auto;
 }
-.todo-item{
+.todo-item {
+    padding: 0px 5px ;
     margin-bottom: 3px;
-    min-height: 40px;
+    min-height: 3rem;
+    font-size: 1.1rem;
+    font-family:  Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: white;
+    display: flex;
+    align-items: center;
+
+    p {
+        display: inline-block;
+        flex: 1;
+        margin-bottom: 0;
+    }
+
+    .btn-delete {
+        background: none;
+        border: none;
+        color: $delete-color;
+    }
 }
+input[type=checkbox] {
+    margin-right: 1rem;
+}
+
+@media (max-width: 770px) {
+    .App{
+      width: 90%;
+    }
+    .app-footer{
+        width: 90%;
+    }
+    .app-header .under-line{
+        width: 50%;
+    }
+  }

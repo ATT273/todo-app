@@ -8,6 +8,7 @@ class List extends Component {
                     key={item.id}
                     item={item}
                     delItem={this.props.delItem}
+                    completeCheck={this.props.completeCheck}
                 />
             ));
     }

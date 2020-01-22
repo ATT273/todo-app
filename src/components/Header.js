@@ -5,7 +5,14 @@ class Header extends Component {
         return (
             <div className="app-header">
                 <h1>My ToDo List</h1>
-                <p>Todo-app v.0.1</p>
+                <div className="under-line"></div>
+                <p>
+                    <h3>{this.props.date.wDay}</h3>
+                </p>
+                <div className="day-n-month">
+                    {this.props.date.month} - {''}
+                    {this.props.date.day}
+                </div>
             </div>
         );
     }

@@ -11,7 +11,7 @@ class Item extends Component {
         const {id, name} = this.props.item;
         const isComplete = this.props.item.complete;
         return (
-            <div className="todo-item" style={this.getStyle()}>
+            <div  className="todo-item" style={this.getStyle()}>
                 {isComplete ? (
                     <input 
                         type="checkbox" 

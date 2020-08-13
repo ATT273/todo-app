@@ -114,7 +114,6 @@ class App extends Component {
         localStorage.getItem('Todos') && this.setState({
             items: JSON.parse(localStorage.getItem('Todos'))
         });
-        console.log(this.state.date.day);
     }
     // add item to list
     addItem = async (name) => {

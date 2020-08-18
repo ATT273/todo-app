@@ -1,6 +1,19 @@
 import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FormControlLabel, Checkbox, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles'
+import { green } from '@material-ui/core/colors'
+import styles from './styles'
 
+const CustomCheckbox = withStyles({
+    root: {
+      color: green[400],
+      '&$checked': {
+        color: green[600],
+      },
+    },
+    checked: {},
+  })((props) => <Checkbox color="default" {...props}/>);
 class Item extends Component {
     getStyle = () => {
         return {
@@ -8,30 +21,46 @@ class Item extends Component {
         }
     }
     render () {
-        const {id, name} = this.props.item;
-        const isComplete = this.props.item.complete;
+        const { classes } = this.props
+        const { id, name, complete, parentId } = this.props.item;
         return (
-            <div className="todo-item" style={this.getStyle()}>
-                {isComplete ? (
-                    <input 
-                        type="checkbox" 
-                        onChange={this.props.completeCheck.bind(this,id)} 
-                        className="" 
-                        checked
+            <div>
+                <div className="todo-item" style={this.getStyle()}>
+                    <FormControlLabel
+                        className={classes.formControlCheckBox}
+                        control={
+                            <CustomCheckbox
+                                checked={complete}
+                                onChange={this.props.completeCheck.bind(this, id)} />
+                        }
+                        label={name}
                     />
-                ) : (
-                    <input 
-                        type="checkbox" 
-                        onChange={this.props.completeCheck.bind(this,id)} 
-                        className=""
-                    />
-                )}
-                    <p>{name}</p>
-                <button className="btn-delete" onClick={this.props.delItem.bind(this,id)}>
-                    <FontAwesomeIcon icon={['fas', 'trash']} />
-                </button>
+                    {
+                        parentId === null &&
+                        <Button
+                        onClick={this.props.addChild.bind(this, id)}
+                        variant='contained'
+                        className={classes.addBtn}
+                    >
+                        <FontAwesomeIcon icon={['fas', 'plus']} color={'#fff'} />
+                    </Button>
+                    }
+                    <Button
+                        onClick={this.props.delItem.bind(this, id)}
+                        variant='contained'
+                        className={`${classes.delBtn} btn-delete`}
+                    >
+                        <FontAwesomeIcon icon={['fas', 'trash']} color={'#fff'} className={'btn-delete'} />
+                    </Button>
+
+                </div>
+                <div style={{paddingLeft: '25px'}}>
+                    {
+                        this.props.children
+                    }
+                </div>
             </div>
         );
     }
 }
-export default Item;
+export default withStyles(styles)(Item);

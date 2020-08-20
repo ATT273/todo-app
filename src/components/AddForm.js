@@ -1,5 +1,8 @@
 import React, {Component}from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FormControlLabel, Checkbox, TextField, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles'
+import styles from './styles'
 
 class AddForm extends Component {
 
@@ -18,25 +21,30 @@ class AddForm extends Component {
     }
 
     render () {
+        const { classes } = this.props;
         return (
             <form onSubmit={this.handleSubmit}>
-                <div className="input-group add-form">
-                    <input 
-                        type="text" 
-                        name="item_name" 
-                        value={this.state.item_name}
-                        onChange={this.handleChange}
-                        className="form-control" 
-                        placeholder="Add new task ..." 
-                    />
-                    <div className="input-group-append">
-                        <button type="submit" className="btn btn-success">
-                            <FontAwesomeIcon icon={['fas', 'plus']} />
-                        </button>
+                <div className="d-flex">
+                    <div className={'flex-grow-1'}>
+                    <TextField
+                        id="standard-basic"
+                        name="item_name"
+                        placeholder="Add new task ..."
+                        fullWidth={true}
+                        onChange={this.handleChange} />
+                    </div>
+                    <div className="">
+                        <Button
+                            onClick={this.handleSubmit}
+                            variant='contained'
+                            className={classes.addBtn}
+                            >
+                            <FontAwesomeIcon icon={['fas', 'plus']} color={'white'} />
+                        </Button>
                     </div>
                 </div>
             </form>
         );
     }
 }
-export default AddForm;
+export default withStyles(styles)(AddForm);

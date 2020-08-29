@@ -36,6 +36,13 @@ class App extends Component {
                     },
                 ]
             },
+            {
+                id: 2,
+                name: 'add your first task',
+                complete: false,
+                parentId: null,
+                children: []
+            },
         ],
         date:
             {

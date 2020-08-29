@@ -23,17 +23,18 @@ class AddForm extends Component {
     render () {
         const { classes } = this.props;
         return (
-            <form onSubmit={this.handleSubmit}>
-                <div className="d-flex">
+            <form onSubmit={this.handleSubmit} className="add-form">
+                <div className="d-flex add-form">
                     <div className={'flex-grow-1'}>
                     <TextField
                         id="standard-basic"
                         name="item_name"
                         placeholder="Add new task ..."
                         fullWidth={true}
+                        variant={'outlined'}
                         onChange={this.handleChange} />
                     </div>
-                    <div className="">
+                    <div className="ml-2">
                         <Button
                             onClick={this.handleSubmit}
                             variant='contained'

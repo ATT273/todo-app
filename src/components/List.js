@@ -13,6 +13,7 @@ class List extends Component {
                     completeCheck={this.props.completeCheck}
                 >
                     {
+                        item.children.length > 0 &&
                         item.children.map(child => (
                             <Item
                                 key={child.id}

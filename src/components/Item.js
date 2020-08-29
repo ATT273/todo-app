@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormControlLabel, Checkbox, Button } from '@material-ui/core';
+import { FormControlLabel, Checkbox, Button, Icon } from '@material-ui/core';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { withStyles } from '@material-ui/core/styles'
 import { green } from '@material-ui/core/colors'
+import AddForm from './AddForm'
 import styles from './styles'
 
 const CustomCheckbox = withStyles({
@@ -15,14 +17,34 @@ const CustomCheckbox = withStyles({
     checked: {},
   })((props) => <Checkbox color="default" {...props}/>);
 class Item extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            showChildren: false,
+        }
+    }
     getStyle = () => {
         return {
             textDecoration: this.props.item.complete ? 'line-through' : 'none'
         }
     }
+
+    addItem = () => {
+        console.log('add item')
+    }
+
+    showChildren = () => {
+        this.setState({
+            showChildren: !this.state.showChildren
+        })
+    }
+
     render () {
-        const { classes } = this.props
-        const { id, name, complete, parentId } = this.props.item;
+        const { showChildren } = this.state
+        const { classes, item } = this.props
+        const { id, name, complete, parentId, children } = this.props.item;
+
         return (
             <div>
                 <div className="todo-item" style={this.getStyle()}>
@@ -37,14 +59,11 @@ class Item extends Component {
                     />
                     {
                         parentId === null &&
-                        <Button
-                        onClick={this.props.addChild.bind(this, id)}
-                        variant='contained'
-                        className={classes.addBtn}
-                    >
-                        <FontAwesomeIcon icon={['fas', 'plus']} color={'#fff'} />
-                    </Button>
+                        <div onClick={this.showChildren} className='arrow-drop-down'>
+                            <ArrowDropDownIcon />
+                        </div>
                     }
+                    
                     <Button
                         onClick={this.props.delItem.bind(this, id)}
                         variant='contained'
@@ -54,9 +73,22 @@ class Item extends Component {
                     </Button>
 
                 </div>
-                <div style={{paddingLeft: '25px'}}>
+                <div style={{ paddingLeft: '25px' }}>
                     {
-                        this.props.children
+                        showChildren &&
+                        <div>
+                            {
+                                parentId === null &&
+                                <div className='todo-item d-flex'>
+                                    <AddForm
+                                        addItem={this.addItem}
+                                    />
+                                </div>
+                            }
+                            {
+                                this.props.children
+                            }
+                        </div>
                     }
                 </div>
             </div>

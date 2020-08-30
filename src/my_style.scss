@@ -5,13 +5,14 @@ $test-color: #1ecbe1;
 $main-color-darker: #2bacb4;
 $main-color-dark: #31c4ce;
 $main-color-light: #b6eef5;
+$test-bg: #26d9be;
 $date-color: #871a0f;
 $app-bg: #f0f0f0;
 $delete-color: #e61924;
 
 // Style
 body {
-    background-color: $main-color-light;
+    background-color: $test-bg;
 }
 
 .App {
@@ -34,7 +35,7 @@ body {
     h1{
         font-weight: bold;
     }
-    p{
+    .weekDayTxt{
         margin-bottom: 0px;
         color: $main-color-dark;
         opacity: 0.8;
@@ -64,11 +65,15 @@ body {
 }
 
 .add-form {
-    margin: 15px auto;
+    width: 100%;
+    input {
+        padding: 10px 14px;
+    }
 }
 .todo-item {
     padding: 0px 5px ;
     margin-bottom: 3px;
+    width: 100%;
     min-height: 3rem;
     font-size: 1.1rem;
     font-family:  Helvetica, sans-serif;
@@ -76,17 +81,25 @@ body {
     background-color: white;
     display: flex;
     align-items: center;
-
     p {
         display: inline-block;
         flex: 1;
         margin-bottom: 0;
     }
 
-    .btn-delete {
+    .btn-delete:hover {
         background: none;
         border: none;
         color: $delete-color;
+        background-color: #f0f0f0;
+    }
+
+    label {
+        margin: 0;
+    }
+    
+    .arrow-drop-down {
+        cursor: pointer;
     }
 }
 input[type=checkbox] {

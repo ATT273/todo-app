@@ -3,13 +3,28 @@ import Item from './Item';
 
 class List extends Component {
     render () {
-        return this.props.items.map((item) => (
+        const { items } = this.props
+        return items.map((item) => (
                 <Item
                     key={item.id}
                     item={item}
                     delItem={this.props.delItem}
+                    addChild={this.props.addChild}
                     completeCheck={this.props.completeCheck}
-                />
+                >
+                    {
+                        item.children.length > 0 &&
+                        item.children.map(child => (
+                            <Item
+                                key={child.id}
+                                item={child}
+                                delItem={this.props.delItem}
+                                addChild={this.props.addChild}
+                                completeCheck={this.props.completeCheck}
+                            />
+                        ))
+                    }
+                </Item>
             ));
     }
 }

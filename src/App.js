@@ -5,6 +5,7 @@ import List from './components/List';
 import Footer from './components/Footer';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import firebase from './config/fbConfig';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './my_style.scss';
@@ -63,9 +64,36 @@ class App extends Component {
             } 
         });
 
+        this.getFirebaseData()
         // localStorage.getItem('Todos') && this.setState({
         //     items: JSON.parse(localStorage.getItem('Todos'))
         // });
+    }
+
+    getFirebaseData = async () => {
+        const db = firebase.firestore()
+        const data = await db.collection('todos')
+
+        data.get()
+            .then(querySnapshot  => {
+                let items  = []
+                querySnapshot.forEach(doc => {
+                    console.log(doc.id , doc.data())
+                    items.push(doc.data())
+                })
+                // if(doc.exists) {
+                //     console.log('doc', doc.data())
+                // } else {
+                //     console.log('not existed')
+                // }
+                this.setState({
+                    items
+                })
+                
+            })
+            .catch(err => {
+                console.log('eerr', err)
+            })
     }
     // add item to list
     addItem = async (name) => {

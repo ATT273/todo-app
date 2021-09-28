@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Header from './components/Header';
-import AddForm from './components/AddForm';
+import SimpleAddForm from './components/SimpleAddForm';
 import List from './components/List';
 import Footer from './components/Footer';
-import {library} from '@fortawesome/fontawesome-svg-core';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,22 +15,22 @@ const moment = require('moment')
 class App extends Component {
 
     state = {
-        items:[
+        items: [
             {
                 id: 1,
-                name: 'add your first task',
-                complete: false,
+                title: 'add your first task',
+                isComplete: false,
                 parentId: null,
                 children: [
                     {
                         id: 1,
-                        name: 'add your first task',
+                        title: 'add your first task',
                         complete: true,
                         parentId: 1,
                     },
                     {
                         id: 2,
-                        name: 'add your sec task',
+                        title: 'add your sec task',
                         complete: false,
                         parentId: 1,
                     },
@@ -38,29 +38,29 @@ class App extends Component {
             },
             {
                 id: 2,
-                name: 'add your first task',
-                complete: false,
+                title: 'add your first task',
+                isComplete: false,
                 parentId: null,
                 children: []
             },
         ],
         date:
-            {
-                day: '',
-                wDay: '',
-            }
+        {
+            day: '',
+            wDay: '',
+        }
     }
-    
-    componentDidMount(){
+
+    componentDidMount() {
         const today = new Date();
         let wDay = moment(today).format("[Today is ] dddd")
         let day = moment(today).format("MMM - D")
 
         this.setState({
-            date:{
-               wDay,
+            date: {
+                wDay,
                 day
-            } 
+            }
         });
 
         // localStorage.getItem('Todos') && this.setState({
@@ -68,18 +68,12 @@ class App extends Component {
         // });
     }
     // add item to list
-    addItem = async (name) => {
-        
-        // create id for item
-        let stateLenght = this.state.items.length;
-        let itemID = stateLenght + 1;
-
+    addItem = async (data) => {
         const newItem = {
-            id: itemID,
-            name,
-            complete: false
+            ...data,
         }
-        await this.setState({items: [newItem, ...this.state.items] });
+        console.log(`data`, data)
+        await this.setState({ items: [newItem, ...this.state.items] });
         await localStorage.setItem('Todos', JSON.stringify(this.state.items));
     }
     addChild = () => {
@@ -87,21 +81,22 @@ class App extends Component {
     }
     // check complete 
     completeCheck = async (id) => {
-        this.setState ({ item:this.state.items.map (item => {
-                if(item.id === id){
+        this.setState({
+            item: this.state.items.map(item => {
+                if (item.id === id) {
                     item.complete = !item.complete
                 }
-            }) 
-        });    
+            })
+        });
         await localStorage.setItem('Todos', JSON.stringify(this.state.items));
     }
     // delete item from list
     delItem = async (id) => {
         let items = this.state.items.filter(item => item.id !== id);
-        await this.setState({ items: items});
+        await this.setState({ items: items });
         await localStorage.setItem('Todos', JSON.stringify(this.state.items));
     }
-    
+
     render() {
         const { date, items } = this.state
         return (
@@ -110,12 +105,12 @@ class App extends Component {
                     <div className="col-md-12">
                         <Header
                             date={date}
-                        /> 
+                        />
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-12 mb-3">
-                        <AddForm
+                        <SimpleAddForm
                             addItem={this.addItem}
                         />
                         {/* {JSON.stringify(this.state.items)} */}
@@ -131,7 +126,7 @@ class App extends Component {
                         />
                     </div>
                 </div>
-                <Footer/>
+                <Footer />
             </div>
         );
     }

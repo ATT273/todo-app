@@ -1,21 +1,21 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormControlLabel, Checkbox, Button, Icon } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { withStyles } from '@material-ui/core/styles'
 import { green } from '@material-ui/core/colors'
-import AddForm from './AddForm'
+import SimpleAddForm from './SimpleAddForm'
 import styles from './styles'
 
 const CustomCheckbox = withStyles({
     root: {
-      color: green[400],
-      '&$checked': {
-        color: green[600],
-      },
+        color: green[400],
+        '&$checked': {
+            color: green[600],
+        },
     },
     checked: {},
-  })((props) => <Checkbox color="default" {...props}/>);
+})((props) => <Checkbox color="default" {...props} />);
 class Item extends Component {
 
     constructor(props) {
@@ -40,10 +40,10 @@ class Item extends Component {
         })
     }
 
-    render () {
+    render() {
         const { showChildren } = this.state
         const { classes, item } = this.props
-        const { id, name, complete, parentId, children } = this.props.item;
+        const { id, title, complete, parentId, children } = this.props.item;
 
         return (
             <div>
@@ -55,7 +55,7 @@ class Item extends Component {
                                 checked={complete}
                                 onChange={this.props.completeCheck.bind(this, id)} />
                         }
-                        label={name}
+                        label={title}
                     />
                     {
                         parentId === null &&
@@ -63,7 +63,7 @@ class Item extends Component {
                             <ArrowDropDownIcon />
                         </div>
                     }
-                    
+
                     <Button
                         onClick={this.props.delItem.bind(this, id)}
                         variant='contained'
@@ -80,7 +80,7 @@ class Item extends Component {
                             {
                                 parentId === null &&
                                 <div className='todo-item d-flex'>
-                                    <AddForm
+                                    <SimpleAddForm
                                         addItem={this.addItem}
                                     />
                                 </div>
